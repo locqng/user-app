@@ -1,4 +1,3 @@
-/* Container for the form */
 .customer-create-container {
   max-width: 400px;
   margin: 50px auto;
@@ -9,7 +8,6 @@
   background-color: #fff;
 }
 
-/* Form heading */
 .customer-create-container h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -17,12 +15,10 @@
   color: #333;
 }
 
-/* Form group (each input field and label) */
 .form-group {
   margin-bottom: 15px;
 }
 
-/* Label styling */
 .form-group label {
   display: block;
   margin-bottom: 5px;
@@ -30,7 +26,6 @@
   color: #555;
 }
 
-/* Input field styling */
 .form-group input {
   width: 100%;
   padding: 10px;
@@ -40,14 +35,12 @@
   box-sizing: border-box;
 }
 
-/* Input field focus state */
 .form-group input:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Submit button styling */
 button[type="submit"] {
   width: 100%;
   padding: 10px;
@@ -59,18 +52,15 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-/* Submit button hover state */
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-/* Submit button disabled state */
 button[type="submit"]:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* Error message styling */
 .error-message {
   color: #dc3545;
   font-size: 14px;

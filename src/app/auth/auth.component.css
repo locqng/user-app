@@ -74,3 +74,8 @@
 .button-group button[type="button"]:hover {
   background-color: #218838;
 }
+
+.button-group button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

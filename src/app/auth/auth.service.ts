@@ -10,7 +10,11 @@ export class AuthService {
   private loginUrl = 'https://localhost:7032/api/auth';
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.loginUrl}/login`, { username, password }, {responseType: 'text'});
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'}
+    );
+    let options = { headers: headers };
+    return this.http.post(`${this.loginUrl}/login`, { username, password }, options);
   }
 
   register(username: string, password: string): Observable<any> {

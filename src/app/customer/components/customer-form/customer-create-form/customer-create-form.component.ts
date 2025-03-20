@@ -17,19 +17,11 @@ import { getCustomers } from '../../../store/customer.actions';
 export class CustomerCreateComponent {
   private store = inject(Store);
   private customerService = inject(CustomerService);
-  @Output() customerCreated = new EventEmitter<Customer>();
-  
-  customer: Customer = {
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    email: '',
-  };
+  @Output() customerCreated = new EventEmitter<NgForm>();
 
   onSubmit(form: NgForm) {
     if (form.valid){
-      this.customerCreated.emit(this.customer);
-      form.resetForm();
+      this.customerCreated.emit(form);
     }
   }
 }

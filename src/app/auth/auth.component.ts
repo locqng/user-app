@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { login } from './store/auth.actions';
+import { clearLogin, login } from './store/auth.actions';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { CommonModule } from '@angular/common';
@@ -25,8 +25,13 @@ export class LoginComponent {
       this.store.dispatch(login({ username: username, password: password }));
       this.store.subscribe((state: any) => {
         if (state.auth.isLoggedIn) {
-          
+          //To be replaced with logout. Add this to treat Back button as logout
+          this.store.dispatch(clearLogin());
           this.router.navigate((['/customer']));
+          this.responseMessage = 'Login Successful!';
+        }
+        else {
+          this.responseMessage = 'Login Failed!';
         }
       });
     }

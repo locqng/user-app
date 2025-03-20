@@ -7,10 +7,15 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Auth] Login Success',
-  props<{ token: string }>()
+  props<{ token: string, role: string }>()
 );
 
 export const loginFailure = createAction(
   '[Auth] Login Failure',
   props<{ error: string }>()
 );
+
+//to be replaced with logout
+export const clearLogin = createAction(
+  '[Auth] Clear Login'
+)

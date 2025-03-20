@@ -6,10 +6,11 @@ import { getCustomers } from '../../store/customer.actions';
 import { NgForm } from '@angular/forms';
 import { CustomerService } from '../../customer.service';
 import { Customer } from '../../store/customer.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-customer-main-page',
-  imports: [CustomerCreateComponent, CustomerListGridComponent],
+  imports: [CustomerCreateComponent, CustomerListGridComponent, CommonModule],
   templateUrl: './customer-main-page.component.html',
   styleUrl: './customer-main-page.component.css'
 })
@@ -20,11 +21,22 @@ export class CustomerMainPageComponent implements OnInit{
 
   customers: any[] = [];
   token: string = '';
+  role: string = '';
+
+  customer: Customer = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    email: '',
+  };
 
   constructor()
   {
     this.store.select('auth').subscribe((authState: any) => {
+      console.log(authState);
       this.token = authState.token;
+      this.role = authState.role;
+      console.log(this.role);
     });
   }
 
@@ -47,13 +59,24 @@ export class CustomerMainPageComponent implements OnInit{
     });
   } 
 
-  onCustomerCreated(newCustomer: Customer): void {
-    this.customerService.create(newCustomer, this.token).subscribe({
-      next: (response) => {
-        this.store.dispatch(getCustomers({token: this.token}));
-        console.log('Customer created successfully:', response);
-      },
-      error: (error) => console.error('Error creating customer:', error),
-    });
+  onCustomerCreated(form: NgForm): void {
+    if (form.valid){
+      let customer: Customer = {
+        firstName: form.value.firstName,
+        middleName: form.value.middleName,
+        lastName: form.value.lastName,
+        email: form.value.email,
+      };
+      this.customerService.create(customer, this.token).subscribe({
+        next: (response) => {
+          this.store.dispatch(getCustomers({token: this.token}));
+          console.log('Customer created successfully:', response);
+          form.resetForm();
+        },
+        error: (error) => console.error('Error creating customer:', error),
+      });
+    }
+
+    
   }
 }
