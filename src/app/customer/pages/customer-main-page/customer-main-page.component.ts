@@ -22,6 +22,7 @@ export class CustomerMainPageComponent implements OnInit{
   customers: any[] = [];
   token: string = '';
   role: string = '';
+  responseMessage: string = '';
 
   customer: Customer = {
     firstName: '',
@@ -36,7 +37,6 @@ export class CustomerMainPageComponent implements OnInit{
       console.log(authState);
       this.token = authState.token;
       this.role = authState.role;
-      console.log(this.role);
     });
   }
 
@@ -53,7 +53,6 @@ export class CustomerMainPageComponent implements OnInit{
   getCustomers() {
     this.store.select('customer').subscribe((state: any) => {
       if(!!state && !state.isLoading) {
-        console.log(state);
         this.customers = state.customers;
       }
     });
@@ -68,12 +67,12 @@ export class CustomerMainPageComponent implements OnInit{
         email: form.value.email,
       };
       this.customerService.create(customer, this.token).subscribe({
-        next: (response) => {
+        next: () => {
           this.store.dispatch(getCustomers({token: this.token}));
-          console.log('Customer created successfully:', response);
+          this.responseMessage = 'Customer created successfully';
           form.resetForm();
         },
-        error: (error) => console.error('Error creating customer:', error),
+        error: () => this.responseMessage = 'Error creating customer',
       });
     }
 

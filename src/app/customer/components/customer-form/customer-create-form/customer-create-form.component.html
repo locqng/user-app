@@ -45,5 +45,6 @@
         />
       </div>
       <button type="submit" [disabled]="createForm.form.invalid">Create Customer</button>
+      <div *ngIf="responseMessage" >{{ responseMessage }}</div>
     </form>
   </div>

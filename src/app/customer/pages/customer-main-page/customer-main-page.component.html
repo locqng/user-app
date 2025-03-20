@@ -1,3 +1,3 @@
 <h2>Logged in as {{role}}</h2>
-<app-customer-create *ngIf="role === 'Admin'" (customerCreated)="onCustomerCreated($event)"></app-customer-create>
+<app-customer-create *ngIf="role === 'Admin'" [responseMessage]="responseMessage" (customerCreated)="onCustomerCreated($event)"></app-customer-create>
 <app-customer-list-grid [customers]="customers"></app-customer-list-grid>
